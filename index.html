@@ -111,9 +111,12 @@ header{
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--rule);
   padding:0 48px;
-  display:flex;gap:0;overflow-x:auto;scrollbar-width:none;
+  display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
 }
 .nav-tabs::-webkit-scrollbar{display:none;}
+/* Fade hint showing more tabs */
+.nav-tabs-wrap{position:fixed;top:60px;left:0;right:0;z-index:190;}
+.nav-tabs-fade{position:fixed;top:60px;right:0;width:32px;height:47px;background:linear-gradient(to left,rgba(17,24,32,0.98),transparent);pointer-events:none;z-index:192;}
 
 .tab{
   padding:14px 22px;
@@ -124,6 +127,7 @@ header{
   transition:all 0.2s;
   font-family:'Geist',sans-serif;
   white-space:nowrap;
+  flex-shrink:0;
   display:flex;align-items:center;gap:7px;
 }
 .tab:hover{color:var(--cream);}
@@ -228,6 +232,7 @@ main{padding-top:116px;}
   padding:3px 9px;border-radius:100px;
   font-size:10px;font-weight:400;letter-spacing:0.05em;
   white-space:nowrap;
+  flex-shrink:0;
 }
 .badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
 .b-new{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#EF4444;}
@@ -513,7 +518,10 @@ main{padding-top:116px;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
-  header,.nav-tabs,.panel{padding-left:20px;padding-right:20px;}
+  header,.panel{padding-left:20px;padding-right:20px;}
+  .nav-tabs{padding-left:0;padding-right:0;}
+  .tab{padding:12px 14px;font-size:11px;gap:5px;}
+  .tab-num{display:none;}
   .stats{grid-template-columns:1fr 1fr;}
   .two-col,.three-col{grid-template-columns:1fr;}
   .t5,.row.t5{grid-template-columns:2fr 1fr 80px;}
@@ -557,6 +565,7 @@ main{padding-top:116px;}
 </header>
 
 <!-- TABS -->
+<div class="nav-tabs-fade"></div>
 <div class="nav-tabs">
   <button class="tab active" onclick="showPanel('dashboard',this)"><span class="tab-num">1</span> Dashboard</button>
   <button class="tab" onclick="showPanel('complaints',this)"><span class="tab-num">2</span> Complaints</button>
